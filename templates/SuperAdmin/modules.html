@@ -1,0 +1,216 @@
+{% extends "SuperAdmin/index.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-4 pb-2">
+  <div class="ms-md-auto py-2 py-md-0" style="padding-right: 10px;">
+    <a href="/super-admin/" class="btn btn-label-info btn-round me-2">Show Modules</a>
+    <a href="/super-admin/register-module/" class="btn btn-primary btn-round">Add Module</a>
+  </div>
+</div>
+
+{% if checkmodules %}
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+    <div class="card-title">Modules</div>
+    <div>
+        <form class="navbar-left navbar-form nav-search d-flex gap-3">
+            <div class="input-group">
+              <input type="text" placeholder="Search ..." class="form-control" />
+            </div>
+            <button type="button" class="btn btn-primary btn-round">Filter</button>
+          </form>
+      </div>
+  </div>
+  <div class="card-body">
+    <div class="card-sub">
+
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Action</th>
+            <th>Module Name</th>
+            <th>Status</th>
+            <th>created At</th>
+            <th>created By</th>
+            <th>Updated At</th>
+            <th>Updated By</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for mod in modules %}
+          <tr>
+            <th scope="row">{{mod.id}}</th>
+            <td>
+              <div class="btn-group dropend">
+                <button type="button" class="btn btn-white dropbtn"
+                  id="myDropdown">
+                  &#x2022;&#x2022;&#x2022;
+                </button>
+                <ul class="" id="dropdownmenu" role="menu">
+                  <li>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td>{{mod.name}}</td>
+            <td>{{mod.status}}</td>
+            <td>{{mod.created_at}}</td>
+            <td>{{mod.created_by}}</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+          {% endfor %}
+          <!-- <tr>
+            <th scope="row">1</th>
+            <td>&#x2022;&#x2022;&#x2022;</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+          <tr>
+            <th scope="row">1</th>
+            <td>&#x2022;&#x2022;&#x2022;</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<style>
+
+  #dropdownmenu {
+    display: none;
+  }
+  .dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dropbtn:hover,
+  .dropbtn:focus {
+    background-color: #2980B9;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown a:hover {
+    background-color: #ddd;
+  }
+
+  .show {
+    display: block;
+  }
+</style>
+{% else %}
+{% block addmodule %}
+
+{% endblock addmodule %}
+{% endif %}
+<!-- <button id="displayNotif" class="btn btn-success">
+  Display
+</button> -->
+<!--   Core JS Files   -->
+<script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+<!-- Bootstrap Notify -->
+<script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+<script>
+  $("#displayNotif").on("click", function () {
+    //   var placementFrom = $("#notify_placement_from option:selected").val();
+    var placementFrom = 'top';
+    //   var placementAlign = $("#notify_placement_align option:selected").val();
+    var placementAlign = 'right';
+    var state = $("#notify_state option:selected").val();
+    var style = $("#notify_style option:selected").val();
+    var content = {};
+
+    content.message =
+      'Turning standard Bootstrap alerts into "notify" like notifications';
+    content.title = "Bootstrap notify";
+    if (style == "withicon") {
+      content.icon = "fa fa-bell";
+    } else {
+      content.icon = "none";
+    }
+    content.url = "index.html";
+    content.target = "_blank";
+
+    $.notify(content, {
+      type: state,
+      placement: {
+        from: placementFrom,
+        align: placementAlign,
+      },
+      time: 1000,
+      delay: 0,
+    });
+  });
+
+  // function myFunction() {
+  //   document.getElementById("dropdownmenu").style.display = 'block';
+  // }
+
+  window.onclick = function (event) {
+    if (event.target.matches('.dropdown-menu')) {
+      alert("bjkdbd")
+      // var dropdowns = document.getElementsByClassName("dropdown-content");
+      // var i;
+      document.getElementById("dropdownmenu").style.display = 'none';
+      // console.log(dropdowns)
+      // for (i = 0; i < dropdowns.length; i++) {
+      //   var openDropdown = dropdowns[i];
+      //   console.log(openDropdown);
+      //   // if (openDropdown.classList.contains('block')) {
+      //   //   openDropdown.classList.remove('none');
+      //   // }
+      // }
+    } else {
+      document.getElementById("dropdownmenu").classList[1] = 'dropdown-menu';
+      document.getElementById("dropdownmenu").style.display = 'block';
+    }
+  }
+</script>
+
+
+
+{% endblock main %}

@@ -1,0 +1,164 @@
+{% extends "SuperAdmin/index.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-4 pb-2">
+  <div class="ms-md-auto py-2 py-md-0" style="padding-right: 10px;">
+    <a href="#" class="btn btn-label-info btn-round me-2">Show {{modules.name|title}}</a>
+    <a href="/super-admin/register-company/" class="btn btn-primary btn-round">Add {{modules.name|title}}</a>
+  </div>
+</div>
+
+{% if category %}
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+    <div class="card-title">All Companies</div>
+    <!-- <div>
+        <form class="navbar-left navbar-form nav-search d-flex gap-3">
+            <div class="input-group">
+              <input type="text" placeholder="Search ..." class="form-control" />
+            </div>
+            <button type="button" class="btn btn-primary btn-round">Filter</button>
+          </form>
+      </div> -->
+  </div>
+  <div class="card-body">
+    <div class="card-sub">
+
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Action</th>
+            <th>Company Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Photo</th>
+            <th>Modules</th>
+            <th>Status</th>
+            <th>created At</th>
+            <th>created By</th>
+            <th>Updated At</th>
+            <th>Updated By</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>
+              <div class="btn-group dropend">
+                <button type="button" class="btn btn-white dropbtn"
+                  id="myDropdown">
+                  &#x2022;&#x2022;&#x2022;
+                </button>
+                <ul class="" id="dropdownmenu" role="menu">
+                  <li>
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+          <tr>
+            <th scope="row">1</th>
+            <td>&#x2022;&#x2022;&#x2022;</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+          <tr>
+            <th scope="row">1</th>
+            <td>&#x2022;&#x2022;&#x2022;</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% else %}
+{% block company_register %}
+
+{% endblock company_register %}
+{% endif %}
+<!-- <button id="displayNotif" class="btn btn-success">
+  Display
+</button> -->
+<!--   Core JS Files   -->
+<script src="{% static 'assets/js/core/jquery-3.7.1.min.js' %}"></script>
+<!-- Bootstrap Notify -->
+<script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+<script>
+  $("#displayNotif").on("click", function () {
+    //   var placementFrom = $("#notify_placement_from option:selected").val();
+    var placementFrom = 'top';
+    //   var placementAlign = $("#notify_placement_align option:selected").val();
+    var placementAlign = 'right';
+    var state = $("#notify_state option:selected").val();
+    var style = $("#notify_style option:selected").val();
+    var content = {};
+
+    content.message =
+      'Turning standard Bootstrap alerts into "notify" like notifications';
+    content.title = "Bootstrap notify";
+    if (style == "withicon") {
+      content.icon = "fa fa-bell";
+    } else {
+      content.icon = "none";
+    }
+    content.url = "index.html";
+    content.target = "_blank";
+
+    $.notify(content, {
+      type: state,
+      placement: {
+        from: placementFrom,
+        align: placementAlign,
+      },
+      time: 1000,
+      delay: 0,
+    });
+  });
+
+  
+</script>
+
+
+
+{% endblock main %}

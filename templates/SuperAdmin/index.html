@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="{% static 'assets/img/kaiadmin/favicon.ico' %}" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="{% static 'assets/js/plugin/webfont/webfont.min.js' %}"></script>
+    <script>
+        WebFont.load({
+            google: { families: ["Public Sans:300,400,500,600,700"] },
+            custom: {
+                families: [
+                    "Font Awesome 5 Solid",
+                    "Font Awesome 5 Regular",
+                    "Font Awesome 5 Brands",
+                    "simple-line-icons",
+                ],
+                urls: ["assets/css/fonts.min.css"],
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            },
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/plugins.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/kaiadmin.min.css' %}" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="{% static 'assets/css/demo.css' %}" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
+            <div class="sidebar-logo">
+                <!-- Logo Header -->
+                <div class="logo-header" data-background-color="dark">
+                    <a href="index.html" class="logo">
+                        <img src="{% static 'assets/img/kaiadmin/logo_light.svg' %}" alt="navbar brand"
+                            class="navbar-brand" height="20" />
+                        <!-- <span class="navbar-brand"> Admin</span> -->
+                    </a>
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
+                <!-- End Logo Header -->
+            </div>
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-item active">
+                            <a href="/super-admin/" aria-expanded="false">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Components</h4>
+                        </li>
+                        {% for mod in modules %}
+                        <li class="nav-item">
+                            <a href="/super-admin/modules/{{ mod.id }}/">
+                                <i class="fas fa-layer-group"></i>
+                                <p>{{mod.name|title}}</p>
+                                <!-- <span class="caret"></span> -->
+                            </a>
+                        </li>
+                        {% endfor %}
+                        <!-- <li class="nav-item">
+                            <a href="">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Designations</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="">
+                                <i class="fas fa-layer-group"></i>
+                                <p>Payment Mode</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'companies' %}">
+                                <i class="fas fa-th-list"></i>
+                                <p>Company</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#sidebarLayouts">
+                                <i class="fas fa-th-list"></i>
+                                <p>Employee</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#forms">
+                                <i class="fas fa-pen-square"></i>
+                                <p>Students</p>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="main-panel">
+            <div class="main-header">
+                <!-- Navbar Header -->
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+                    <div class="container-fluid">
+                        <nav
+                            class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+                            <div class="input-group">
+                            </div>
+                        </nav>
+
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <li class="nav-item topbar-user ">
+                                <a class="profile-pic" href="#" aria-expanded="false">
+                                    <span class="profile-username">
+                                        <span class="op-7">Hi,</span>
+                                        <span class="fw-bold">Super Admin</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+
+            <div class="container">
+                {% block main %}
+
+                {% endblock main %}
+            </div>
+
+            <footer class="footer">
+                <div class="container-fluid d-flex justify-content-between">
+                    <nav class="pull-left">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://www.themekita.com">
+                                    ThemeKita
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Help </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Licenses </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright">
+                        2024, made with <i class="fa fa-heart heart text-danger"></i> by
+                        <a href="http://www.themekita.com">ThemeKita</a>
+                    </div>
+                    <div>
+                        Distributed by
+                        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- End Custom template -->
+    </div>
+    <!--   Core JS Files   -->
+    <!-- <script src="{% static 'assets/js/core/jquery-3.7.1.min.j' %}"></script> -->
+    <!-- <script src="{% static 'assets/js/core/popper.min.js' %}"></script> -->
+    <script src="{% static 'assets/js/core/bootstrap.min.js' %}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="{% static 'assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js' %}"></script>
+
+    <!-- Chart JS -->
+    <script src="{% static 'assets/js/plugin/chart.js/chart.min.js' %}"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="{% static 'assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js' %}"></script>
+
+    <!-- Chart Circle -->
+    <script src="{% static 'assets/js/plugin/chart-circle/circles.min.js' %}"></script>
+
+    <!-- Datatables -->
+    <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="{% static 'assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+
+
+</body>
+
+</html>
